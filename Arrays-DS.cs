@@ -14,35 +14,26 @@ using System;
 
 class Solution {
 
-    // Complete the quickSort function below.
-    static int[] quickSort(int[] arr) {
-        if (arr.Length <= 1)
-            return arr;
-
-        var pivot = arr[arr.Length / 2];
-        var left = new List<int>();
-        var right = new List<int>();
-        for (var i = 0; i < arr.Length; i++)
-        {
-            if (arr[i] < pivot)
-                left.Add(arr[i]);
-            else if (arr[i] > pivot)
-                right.Add(arr[i]);
+    // Complete the reverseArray function below.
+    static int[] reverseArray(int[] a) {
+        for (var i=0; i<a.Length/2; i++){
+            var temp=a[i];
+            a[i] = a[a.Length-i-1];
+            a[a.Length-i-1] = temp;
         }
-
-        return quickSort(left.ToArray()).Concat(new[] { pivot }).Concat(quickSort(right.ToArray())).ToArray();
+        return a;
     }
 
     static void Main(string[] args) {
         TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
 
-        int n = Convert.ToInt32(Console.ReadLine());
+        int arrCount = Convert.ToInt32(Console.ReadLine());
 
         int[] arr = Array.ConvertAll(Console.ReadLine().Split(' '), arrTemp => Convert.ToInt32(arrTemp))
         ;
-        int[] result = quickSort(arr);
+        int[] res = reverseArray(arr);
 
-        textWriter.WriteLine(string.Join(" ", result));
+        textWriter.WriteLine(string.Join(" ", res));
 
         textWriter.Flush();
         textWriter.Close();
